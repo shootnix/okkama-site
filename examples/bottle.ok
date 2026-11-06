@@ -1,0 +1,22 @@
+module bottle v1.0.0;
+
+object Bottle {
+    has opened is bool = false;
+    Bottle();
+
+    open() is ^Bottle {
+        confirm !opened;
+        ^opened = true;
+    }
+
+    is_open() is bool { opened; }
+}
+
+main() is int {
+    let bottle = Bottle();
+    let opened = bottle.open();
+
+    confirm !bottle.is_open();  // original unchanged
+    confirm opened.is_open();  // new state
+    0;
+}

@@ -1,0 +1,23 @@
+module packages v1.0.0;
+
+role Package {
+    open() is ^Package;
+    is_open() is bool;
+
+    fake {
+        has opened is bool = false;
+
+        open() is ^Package {
+            ^opened = true;
+        }
+
+        is_open() is bool { opened; }
+    }
+}
+
+test "a package can be opened" {
+    let package is Package = Package.fake();
+
+    test.ok(package.open().is_open());
+    test.ok(!package.is_open());
+}
